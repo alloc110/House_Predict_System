@@ -16,7 +16,7 @@ pipeline {
         stage('Build & Deploy') {
            
             steps {
-                sscript {
+                script {
             // Bước 1: Dừng toàn bộ các container cũ thuộc project này
             // --remove-orphans: Xóa cả những container "mồ côi" không còn nằm trong file yml
             sh 'docker compose down --remove-orphans'
