@@ -13,20 +13,22 @@ pipeline {
             }
         }
 
-        stage('Build & Deploy') {
-           
-            steps {
-                script {
-          echo "--- Đang dọn dẹp hệ thống cũ để tránh xung đột ---"
-            // 1. Dừng và xóa các container, network cũ thuộc dự án này
-            // --remove-orphans: Xóa cả những container cũ không còn khai báo trong file yml
-            sh 'docker-compose down --remove-orphans'
+       stage('Build & Deploy') {
+    steps {
+        script {
+            echo "--- Quét sạch mọi container trùng tên để dẹp đường ---"
+            // Lệnh này sẽ xóa thẳng tay các container nếu chúng tồn tại, bất kể thuộc project nào
+            sh 'docker rm -f fastapi promtail jaeger loki prometheus || true'
 
-            echo "--- Đang build và khởi động hệ thống mới ---"
-            // 2. Build lại image và ép buộc tạo mới container (ngăn lỗi Conflict)
-            sh 'docker-compose up -d --build --force-recreate'
-        }
+            echo "--- Đang dọn dẹp và khởi chạy hệ thống ---"
+            // Dùng với biến môi trường từ Jenkins
+            withCredentials([string(credentialsId: 'gemini-api-key-id', variable: 'GEMINI_KEY')]) {
+                // Truyền GEMINI_KEY vào GOOGLE_API_KEY cho docker-compose
+                sh "GOOGLE_API_KEY=${GEMINI_KEY} docker-compose down --remove-orphans"
+                sh "GOOGLE_API_KEY=${GEMINI_KEY} docker-compose up -d --build --force-recreate"
             }
         }
+    }
+}
     }
 }
