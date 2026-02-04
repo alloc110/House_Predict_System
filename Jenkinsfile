@@ -18,13 +18,13 @@ pipeline {
         script {
             echo "--- Quét sạch mọi container trùng tên để dẹp đường ---"
             // Lệnh này sẽ xóa thẳng tay các container nếu chúng tồn tại, bất kể thuộc project nào
-            sh 'docker rm -f fastapi promtail jaeger loki prometheus || true'
+         
 
             echo "--- Đang dọn dẹp và khởi chạy hệ thống ---"
             // Dùng với biến môi trường từ Jenkins
             withCredentials([string(credentialsId: 'gemini-api-key-id', variable: 'GEMINI_KEY')]) {
                 // Truyền GEMINI_KEY vào GOOGLE_API_KEY cho docker-compose
-                sh 'docker compose up -d --build --force-recreate fastapi promtail jaeger'
+               sh 'docker compose -f docker-compose.yaml up -d --build --force-recreate'
             }
         }
     }
