@@ -36,20 +36,20 @@ services:
     restart: unless-stopped
     networks:
       - monitoring-network
-  jenkins:
-    image: jenkins/jenkins:lts-jdk21
-    container_name: jenkins_docker
-    privileged: true
-    user: root
-    ports:
-      - "8080:8080"   # Cổng giao diện chính
-      - "50000:50000" # Cổng cho các Jenkins Agent (nếu có)
-    volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock # Giúp Jenkins chạy được lệnh docker
-    networks:
-      - monitoring-network
-    restart: unless-stopped
+  # jenkins:
+  #   image: jenkins/jenkins:lts-jdk21
+  #   container_name: jenkins_docker
+  #   privileged: true
+  #   user: root
+  #   ports:
+  #     - "8080:8080"   # Cổng giao diện chính
+  #     - "50000:50000" # Cổng cho các Jenkins Agent (nếu có)
+  #   volumes:
+  #     - jenkins_home:/var/jenkins_home
+  #     - /var/run/docker.sock:/var/run/docker.sock # Giúp Jenkins chạy được lệnh docker
+  #   networks:
+  #     - monitoring-network
+  #   restart: unless-stopped
   web-app:
     # Chỉ định đường dẫn chứa Dockerfile để build
     build: .
