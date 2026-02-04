@@ -17,13 +17,14 @@ pipeline {
            
             steps {
                 script {
-            // Bước 1: Dừng toàn bộ các container cũ thuộc project này
-            // --remove-orphans: Xóa cả những container "mồ côi" không còn nằm trong file yml
-            sh 'docker compose down --remove-orphans'
-            
-            // Bước 2: Khởi động lại với cờ --force-recreate
-            // Điều này đảm bảo Docker sẽ xóa container cũ đi nếu nó còn sót lại
-            sh 'docker compose up -d --build --force-recreate'
+          echo "--- Đang dọn dẹp hệ thống cũ để tránh xung đột ---"
+            // 1. Dừng và xóa các container, network cũ thuộc dự án này
+            // --remove-orphans: Xóa cả những container cũ không còn khai báo trong file yml
+            sh 'docker-compose down --remove-orphans'
+
+            echo "--- Đang build và khởi động hệ thống mới ---"
+            // 2. Build lại image và ép buộc tạo mới container (ngăn lỗi Conflict)
+            sh 'docker-compose up -d --build --force-recreate'
         }
             }
         }
