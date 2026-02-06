@@ -14,4 +14,4 @@ COPY ./app /code/app
 
 # Chạy ứng dụng với Uvicorn
 # --host 0.0.0.0 là bắt buộc để Docker có thể ánh xạ port ra ngoài
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
