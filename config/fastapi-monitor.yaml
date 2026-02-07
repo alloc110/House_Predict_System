@@ -13,5 +13,5 @@ spec:
     matchNames:
       - default-namespace # Chỉ định tìm ở phòng này
   endpoints:
-  - port: http # Tên cổng được định nghĩa trong Service của bạn
-    path: /metrics # Đường dẫn chứa dữ liệu thô (FastAPI cần cài thêm prometheus-fastapi-instrumentator)
+    - port: http # Tên cổng được định nghĩa trong Service của bạn
+      path: /metrics # Đường dẫn chứa dữ liệu thô (FastAPI cần cài thêm prometheus-fastapi-instrumentator)

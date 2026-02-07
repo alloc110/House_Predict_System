@@ -150,7 +150,7 @@ We use **Prometheus** to scrape metrics and **Grafana** to visualize them. Ensur
 
 ### 1. Install Prometheus Stack
 
-Add the community repository and install the stack into the `monitoring` namespace:
+Add the community repository and install the stack into the `monitoring-namespace` namespace:
 
 ```bash
 # Add Helm Repo
@@ -198,4 +198,10 @@ Import Dashboard ID 12900 in Grafana.
 
 ## ⚓ Demo Video
 
-![🎥 Xem Demo Video](Analysis-Image-System/assets/video/video_demo_fastapi.gif)
+### Demo FastAPI
+
+![🎥 Xem Demo Video](assets/video/video_demo_fastapi.gif)
+
+### Demo Grafana
+
+![🎥 Xem Demo Video](assets/video/video_demo_grafana.gif)
