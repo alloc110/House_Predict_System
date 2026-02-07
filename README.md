@@ -143,7 +143,7 @@ kubectl port-forward svc/fastapi-service 8000:80 -n default-namespace
 
 Once the port-forward is running, access the FastAPI Swagger UI by clicking the link below:
 
-👉 http://localhost:8080/docs
+👉 http://localhost:8000/docs
 
 ## 🖥️ Monitoring & Observability
 
